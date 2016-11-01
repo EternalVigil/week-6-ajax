@@ -1,3 +1,41 @@
 @charset "UTF-8";
 /* CSS Document */
-
+#container {
+	width: 80%;
+	height: 100%;
+	min-height: 500px;
+	margin: 0 10%;
+	border: solid 2px red;
+	background-color: silver;
+}
+#typeRow {
+	float: left;
+	display: block;
+	width: 100%;
+	height: auto;
+	min-height: 50px;
+	background-color: blue;
+}
+#giphyContainer {
+	clear: both;
+	float: left;
+	display: inline-block;
+	width: 80%;
+	height: 100%;
+	min-height: 450px;
+	margin: 0;
+	background-color: red;
+}
+#searchBar {
+	float: left;
+	display: inline-block;
+	width: 20%;
+	height: auto;
+	min-height: 150px;
+	margin: 0;
+	background-color: green;
+}
+#searchKey {
+	width: 100%;
+	margin: 0;
+}
