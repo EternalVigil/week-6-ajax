@@ -7,13 +7,14 @@ var searchList = [];
 $("#submitButton").on("click", function(){
 var searchTerm = $("#searchKey").val().trim();	
 console.log(searchTerm);
+	searchList.push(searchTerm);
 });
 
 for (var i = 0; i < searchList.length; i++){
 	var b = $("<button/>");
 	b.text(searchList[i]);
 	b.attr("class", "itemButton");
-	b.val(searchList[i]);
+	b.attr("data-name", searchList[i]);
 }
 
 
