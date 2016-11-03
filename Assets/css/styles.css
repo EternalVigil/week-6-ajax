@@ -49,4 +49,19 @@
 .giphyImg {
 	width: 200px;
 	height: 200px;
+	display: block;
+	text-align: center;
+	margin: auto;
+}
+.imgHolder{
+	float: left;
+	display: inline-block;
+	margin: 5px 0px;
+	width: 20%;
+	height: auto;
+}
+.RatingIMG{
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
 }

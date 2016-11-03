@@ -1,9 +1,10 @@
 // JavaScript Document
 var apiURL = "http://api.giphy.com/v1/gifs/search?q=";
 var apiKey = "&api_key=dc6zaTOxFJmzC";
-var searchList = [];
+var topics = [];
 var searchTerm = "";
 var queryURL = "";
+var giphyLimit = 10;
 
 $("#submit").on("click", function () {
 	"use strict";
@@ -15,8 +16,8 @@ $("#submit").on("click", function () {
 	else{
 	console.log(searchTerm);
 
-	searchList.push(searchTerm);
-	//console.log(searchList);
+	topics.push(searchTerm);
+	//console.log(topics);
 
 	createButtons();
 
@@ -28,6 +29,8 @@ $("#submit").on("click", function () {
 
 
 	$(document).on("click", ".itemButton", clickButton);
+	$(document).on("click", ".giphyImg", toggleState);
+	
 	
 // var queryURL = "http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC";
 
@@ -35,16 +38,16 @@ function createButtons() {
 	"use strict";
 	$("#typeRow").empty();
 
-	for (var i = 0; i < searchList.length; i++) {
+	for (var i = 0; i < topics.length; i++) {
 
 
-		console.log(searchList[i]);
+		console.log(topics[i]);
 		console.log(i);
 
 		var b = $("<button/>");
-		b.text(searchList[i]);
+		b.text(topics[i]);
 		b.attr("class", "itemButton");
-		b.attr("data-name", searchList[i]);
+		b.attr("data-name", topics[i]);
 
 		$("#typeRow").append(b);
 	}
@@ -76,17 +79,58 @@ function ajaxCall() {
 }
 function populateGifs(info){
 	"use strict";
+	$("#giphyContainer").empty();
 	console.log(info);
-	for (var i = 0; i < info.data.length; i++){
-	var temp = info.data[i].images.fixed_height.url;
-	//temp = temp.replace("http://", "");
+	for (var i = 0; i < giphyLimit; i++){
+		
+	var animatedImg = info.data[i].images.fixed_height.url;
+	var staticImg = info.data[i].images.original_still.url;
+	var imgRating = info.data[i].rating;
+		console.log(imgRating);
+		
+	var d = $("<div>");
+	d.addClass("imgHolder");
+		
 	var x = $("<img>");
 	x.attr("class", "giphyImg");
-	x.attr("src", temp);
-	$("#giphyContainer").append(x);	
-	console.log(temp);	
+	x.attr("src", staticImg);
+	x.attr("staticURL", staticImg);
+	x.attr("animatedURL", animatedImg);
+	x.attr("state", "static");
+	
+	var p = $("<p>");
+	p.addClass("RatingIMG");
+	p.text("Giphy Rating: " + imgRating);
+		
+	$(d).append(x);
+	$(d).append(p);
+		
+	$("#giphyContainer").append(d);	
+	console.log(x);	
 	}
 	
+}
+function toggleState(){
+	"use strict";
+	console.log("Yes?");
+	var newURL = "";
+	var stateCheck = $(this).attr("state");
+	console.log(stateCheck);
+	
+	if (stateCheck === "static"){
+		console.log("image ain't moving");
+		newURL = $(this).attr("animatedURL");
+		$(this).attr("state", "animated");
+		
+	}
+	else {
+		console.log("why'd you stop?");
+		newURL = $(this).attr("staticURL");
+		$(this).attr("state", "static");
+		
+		
+	}
+	$(this).attr("src", newURL);
 }
 //var imageHolder = $("<div/>");
 //var giphyImage = $("<img/>");
