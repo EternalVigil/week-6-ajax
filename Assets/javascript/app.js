@@ -1,20 +1,21 @@
 // JavaScript Document
+$(document).ready(function(){
+	"use strict";
 var apiURL = "http://api.giphy.com/v1/gifs/search?q=";
 var apiKey = "&api_key=dc6zaTOxFJmzC";
-var topics = [];
+var topics = ["Tesla", "Elon Musk", "John Cleese", "Gary Oldman", "Macbook Pro", "Explosions", "Batman"];
 var searchTerm = "";
 var queryURL = "";
 var giphyLimit = 10;
 
 $("#submit").on("click", function () {
-	"use strict";
 	searchTerm = $("#searchWord").val().trim();
 	if (searchTerm === ""){
-		console.log("You didn't enter anything.");
+		//console.log("You didn't enter anything.");
 		return false;
 	}
 	else{
-	console.log(searchTerm);
+	//console.log(searchTerm);
 
 	topics.push(searchTerm);
 	//console.log(topics);
@@ -25,24 +26,16 @@ $("#submit").on("click", function () {
 
 	return false;
 	}
-});
-
-
-	$(document).on("click", ".itemButton", clickButton);
-	$(document).on("click", ".giphyImg", toggleState);
-	
-	
-// var queryURL = "http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC";
+});	
 
 function createButtons() {
-	"use strict";
 	$("#typeRow").empty();
 
 	for (var i = 0; i < topics.length; i++) {
 
 
-		console.log(topics[i]);
-		console.log(i);
+		//console.log(topics[i]);
+		//console.log(i);
 
 		var b = $("<button/>");
 		b.text(topics[i]);
@@ -54,17 +47,15 @@ function createButtons() {
 
 }
 function clickButton(){
-	"use strict";
-	console.log("you clicked?");
+	//console.log("you clicked?");
 	searchTerm = $(this).text();
-	console.log(searchTerm);
+	//console.log(searchTerm);
 	queryURL = apiURL + searchTerm + apiKey;
-	console.log(queryURL);
+	//console.log(queryURL);
 	ajaxCall();
 }
 
 function ajaxCall() {
-	"use strict";
 	$.ajax({
 		url: queryURL,
 		method: "GET"
@@ -73,20 +64,19 @@ function ajaxCall() {
 		//console.log(giphyData);
 		populateGifs(giphyData);
 	}).fail(function () {
-		console.log("Unexpected error / server timeout - try again");
+		//console.log("Unexpected error / server timeout - try again");
 	});
 
 }
 function populateGifs(info){
-	"use strict";
 	$("#giphyContainer").empty();
-	console.log(info);
+	//console.log(info);
 	for (var i = 0; i < giphyLimit; i++){
 		
 	var animatedImg = info.data[i].images.fixed_height.url;
 	var staticImg = info.data[i].images.original_still.url;
 	var imgRating = info.data[i].rating;
-		console.log(imgRating);
+		//console.log(imgRating);
 		
 	var d = $("<div>");
 	d.addClass("imgHolder");
@@ -106,25 +96,24 @@ function populateGifs(info){
 	$(d).append(p);
 		
 	$("#giphyContainer").append(d);	
-	console.log(x);	
+	//console.log(x);	
 	}
 	
 }
 function toggleState(){
-	"use strict";
-	console.log("Yes?");
+	//console.log("Yes?");
 	var newURL = "";
 	var stateCheck = $(this).attr("state");
-	console.log(stateCheck);
+	//console.log(stateCheck);
 	
 	if (stateCheck === "static"){
-		console.log("image ain't moving");
+		//console.log("image ain't moving");
 		newURL = $(this).attr("animatedURL");
 		$(this).attr("state", "animated");
 		
 	}
 	else {
-		console.log("why'd you stop?");
+		//console.log("why'd you stop?");
 		newURL = $(this).attr("staticURL");
 		$(this).attr("state", "static");
 		
@@ -132,5 +121,12 @@ function toggleState(){
 	}
 	$(this).attr("src", newURL);
 }
-//var imageHolder = $("<div/>");
-//var giphyImage = $("<img/>");
+function clearWindow(){
+	$("#searchWord").val("");
+	return false;
+}
+	$(document).ready(createButtons());
+	$(document).on("click", ".itemButton", clickButton);
+	$(document).on("click", "#clearButton", clearWindow);
+	$(document).on("click", ".giphyImg", toggleState);
+	});

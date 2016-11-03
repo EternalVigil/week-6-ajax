@@ -2,10 +2,8 @@
 /* CSS Document */
 #container {
 	width: 80%;
-	height: 100%;
-	min-height: 500px;
+	height: 550px;
 	margin: 0 10%;
-	border: solid 2px red;
 	background-color: silver;
 }
 #typeRow {
@@ -13,8 +11,10 @@
 	display: block;
 	width: 100%;
 	height: auto;
-	min-height: 50px;
-	background-color: blue;
+	padding-top: 5px;
+	min-height: 30px;
+	background-color: whitesmoke;
+	overflow: scroll;
 }
 #giphyContainer {
 	clear: both;
@@ -24,7 +24,12 @@
 	height: 100%;
 	min-height: 450px;
 	margin: 0;
-	background-color: red;
+	background-color: lightgray;
+}
+#nameSearch{
+	padding-top: 10px;
+	padding-left: 10px;
+	height: 540px;
 }
 #searchBar {
 	float: left;
@@ -33,11 +38,22 @@
 	height: auto;
 	min-height: 150px;
 	margin: 0;
-	background-color: green;
+	background-color: silver;
 }
 #searchKey {
 	width: 100%;
 	margin: 0;
+	
+}
+#searchWord{
+	width: 90%;
+	
+}
+#submit{
+	width: 45%;
+}
+#clearButton{
+	width: 45%;
 }
 .itemButton {
 	width: auto;
