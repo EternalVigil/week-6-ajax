@@ -1,7 +1,7 @@
 // JavaScript Document
 $(document).ready(function(){
 	"use strict";
-var apiURL = "http://api.giphy.com/v1/gifs/search?q=";
+var apiURL = "https://api.giphy.com/v1/gifs/search?q=";
 var apiKey = "&api_key=dc6zaTOxFJmzC";
 var topics = ["Tesla", "Elon Musk", "John Cleese", "Gary Oldman", "Macbook Pro", "Explosions", "Batman"];
 var searchTerm = "";
