@@ -8,26 +8,27 @@ var queryURL = "";
 $("#submit").on("click", function () {
 	"use strict";
 	searchTerm = $("#searchWord").val().trim();
+	if (searchTerm === ""){
+		console.log("You didn't enter anything.");
+		return false;
+	}
+	else{
 	console.log(searchTerm);
 
 	searchList.push(searchTerm);
-	console.log(searchList);
+	//console.log(searchList);
 
 	createButtons();
 
 	$("#searchWord").val("");
 
-	queryURL = apiURL + searchTerm + apiKey;
-	console.log(queryURL);
-
-
-
-
-
-
 	return false;
+	}
 });
 
+
+	$(document).on("click", ".itemButton", clickButton);
+	
 // var queryURL = "http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC";
 
 function createButtons() {
@@ -49,6 +50,15 @@ function createButtons() {
 	}
 
 }
+function clickButton(){
+	"use strict";
+	console.log("you clicked?");
+	searchTerm = $(this).text();
+	console.log(searchTerm);
+	queryURL = apiURL + searchTerm + apiKey;
+	console.log(queryURL);
+	ajaxCall();
+}
 
 function ajaxCall() {
 	"use strict";
@@ -57,12 +67,18 @@ function ajaxCall() {
 		method: "GET"
 
 	}).done(function (giphyData) {
-		console.log(giphyData);
+		//console.log(giphyData);
+		populateGifs(giphyData);
 	}).fail(function () {
 		console.log("Unexpected error / server timeout - try again");
 	});
 
 }
-
+function populateGifs(info){
+	"use strict";
+	console.log(info);
+	var temp = info.data[0].embed_url;
+	console.log(temp);
+}
 //var imageHolder = $("<div/>");
 //var giphyImage = $("<img/>");
