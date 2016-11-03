@@ -77,8 +77,16 @@ function ajaxCall() {
 function populateGifs(info){
 	"use strict";
 	console.log(info);
-	var temp = info.data[0].embed_url;
-	console.log(temp);
+	for (var i = 0; i < info.data.length; i++){
+	var temp = info.data[i].images.fixed_height.url;
+	//temp = temp.replace("http://", "");
+	var x = $("<img>");
+	x.attr("class", "giphyImg");
+	x.attr("src", temp);
+	$("#giphyContainer").append(x);	
+	console.log(temp);	
+	}
+	
 }
 //var imageHolder = $("<div/>");
 //var giphyImage = $("<img/>");
